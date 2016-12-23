@@ -1,0 +1,42 @@
+/* Hidden stub code will pass a root argument to the function below. Complete the function to solve the challenge. Hint: you may want to write one or more helper functions.  
+
+The Node class is defined as follows:
+    class Node {
+        int data;
+        Node left;
+        Node right;
+     }
+*/
+    boolean checkBST(Node root) {
+        return testBst(root,null,null);
+    }
+   
+     boolean testBst(Node n, Integer min, Integer max ){
+           if( (min != null && n.data <= min) ||(max != null && n.data >= max)) {
+                return false;
+            }
+        
+            if(n.right !=null && n.left != null){
+                if( n.left.data >= n.right.data || n.data >= n.right.data || n.data <= n.left.data ){
+                    return false;
+                }else{
+                    return testBst(n.left,min,n.data) && testBst(n.right,n.data,max);
+                }
+
+            }else if(n.right == null && n.left == null){
+                return true;
+            }
+            else if(n.right == null){
+                if(n.data > n.left.data){
+                    return testBst(n.left,min,n.data);
+                }
+                else return false;
+            }
+            else {
+                if(n.data < n.right.data){
+                    return testBst(n.right,n.data,max);
+                }
+                else return false;
+            }
+        
+    }
